@@ -1,4 +1,17 @@
 {
-  "name": "tswss",
-  "packageManager": "yarn@4.1.1"
+	"name": "tswss",
+	"packageManager": "yarn@4.2.2",
+	"version": "0.0.1",
+	"scripts": {
+		"build": "tsup src/index.ts --format esm,cjs --dts"
+	},
+	"dependencies": {
+		"@types/ws": "^8.5.10",
+		"alistair": "^1.9.0",
+		"ws": "^8.17.0"
+	},
+	"devDependencies": {
+		"tsup": "^8.0.2",
+		"typescript": "^5.4.5"
+	}
 }
