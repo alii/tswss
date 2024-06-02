@@ -67,6 +67,7 @@ export class TSWSSClient<Send> {
 
 export class TSWSS<Send, Recv> extends EventBus<{
 	close: [];
+	listening: [];
 	message: [client: TSWSSClient<Send>, data: Recv];
 	connection: [client: TSWSSClient<Send>];
 	disconnection: [client: TSWSSClient<Send>];
@@ -94,6 +95,10 @@ export class TSWSS<Send, Recv> extends EventBus<{
 		this.decode = options.decode;
 
 		this.server = new WebSocketServer(rest);
+
+		this.server.on("listening", () => {
+			this.emit("listening");
+		});
 
 		this.heartbeat = setInterval(() => {
 			for (const socket of this.server.clients) {
