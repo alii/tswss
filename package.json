@@ -2,8 +2,17 @@
 	"name": "tswss",
 	"packageManager": "yarn@4.2.2",
 	"version": "0.0.1",
+	"type": "module",
 	"scripts": {
-		"build": "tsup src/index.ts --format esm,cjs --dts"
+		"build": "tsup src/index.ts --format esm,cjs --dts",
+		"release": "yarn build && yarn npm publish"
+	},
+	"exports": {
+		"./package.json": "./package.json",
+		".": {
+			"import": "./dist/index.js",
+			"require": "./dist/index.cjs"
+		}
 	},
 	"dependencies": {
 		"@types/ws": "^8.5.10",
