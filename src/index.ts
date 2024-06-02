@@ -22,7 +22,7 @@ export type BufferLike =
 	| { [Symbol.toPrimitive](hint: string): string };
 
 export type Encode<T> = (data: T) => BufferLike;
-export type Decode<T> = (data: BufferLike) => T;
+export type Decode<T> = (data: Buffer | ArrayBuffer | Buffer[]) => T;
 
 export interface TSWSSOptions<Send, Recv> extends ServerOptions {
 	encode: Encode<Send>;
@@ -129,7 +129,7 @@ export class TSWSS<Send, Recv> extends EventBus<{
 				try {
 					// Behaviour is to ignore invalid messages as
 					// the server "doesn't know how to handle them"
-					data = this.decode(event as BufferLike);
+					data = this.decode(event);
 				} catch {
 					return;
 				}
